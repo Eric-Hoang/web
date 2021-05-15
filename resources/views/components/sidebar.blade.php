@@ -6,8 +6,10 @@
                     <i class="fas fa-search"></i>
                 </span>
             </div>
-            <input type="text" name="search" class="form-control" placeholder="Search..." aria-label="Username"
-                aria-describedby="addon-wrapping">
+            <form action="/search">
+                <input type="text" name="q" class="form-control" placeholder="Search..." aria-label="Username"
+                    aria-describedby="addon-wrapping">
+            </form>
         </div>
         <div class="list-group btn-block" style="margin-top: 1rem;">
             @php

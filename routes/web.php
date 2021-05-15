@@ -4,6 +4,7 @@ use App\Http\Controllers\AppController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Naptiencontroller;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,7 @@ Route::resource('apps.comments', CommentController::class);
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('most-free-download', [AppController::class, 'mostFreeDownLoad'])->name('apps.most-free-download');
 Route::get('most-paid-download', [AppController::class, 'mostPaidDownload'])->name('apps.most-paid-download');
+Route::get('search', [SearchController::class, 'search'])->name('search');
 Route::get('test', function () {
     $val = [50000, 100000, 200000, 500000];
     App\Models\Card::create(['seri' => mt_rand(1, 1000), 'number' => mt_rand(1, 1000), 'amount' => collect($val)->random()]);
