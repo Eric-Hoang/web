@@ -14,7 +14,7 @@
         @endforeach
     </ul>
 
-    <div class="row flex-nowrap">
+    <div class="row flex-nowrap asdsa">
         <div class="card p-4 col-9" style="margin-top: 2rem; ">
             <div class="d-flex">
                 <img src="{{ $app->img_url }}" height="180px" width="180px" style="flex-grow: 0">
