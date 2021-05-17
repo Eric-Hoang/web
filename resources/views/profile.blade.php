@@ -44,7 +44,8 @@
                                     <h4>Your Name</h4>
                                 </label>
                                 <input type="text" class="form-control" name="Your_Name" id="Your_Name"
-                                    placeholder="Change Your Name" title="enter your new name!">
+                                    placeholder="Change Your Name" title="enter your new name!"
+                                    value="{{ Auth::user()->name }}">
                             </div>
                         </div>
 
@@ -58,18 +59,22 @@
                             </div>
                         </div>
 
-
                         <div class="form-group">
-
                             <div class="col-xs-6">
                                 <label for="email">
                                     <h4>Email</h4>
                                 </label>
                                 <input type="email" class="form-control" name="email" id="email"
-                                    placeholder="Example: 519h0129@gmai.com" title="enter your email.">
+                                    placeholder="Example: 519h0129@gmai.com" title="enter your email."
+                                    value="{{ Auth::user()->email }}">
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <div class="d-flex align-items-center">
+                                <label for="email" style="font-weight: 600" class="mb-0">Balance</label>
+                                <div class="ml-2">{{ Auth::user()->balance }}</div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <br>

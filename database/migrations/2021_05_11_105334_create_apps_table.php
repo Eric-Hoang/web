@@ -18,6 +18,7 @@ class CreateAppsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->boolean('is_paid');
+            $table->string('status')->default('approved');
             $table->string('price');
             $table->string('img_url');
             $table->text('screen_shot');

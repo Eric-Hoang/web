@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Naptiencontroller;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WelcomeController;
@@ -30,13 +32,14 @@ Route::get('change-password', 'App\Http\Controllers\ChangePasswordController@ind
 Route::post('change-password', 'App\Http\Controllers\ChangePasswordController@store')->name('change.password');
 Route::get('Deposit', [Naptiencontroller::class, 'index'])->middleware('auth')->name('naptien.index');
 Route::post('Deposit', [Naptiencontroller::class, 'naptien'])->middleware('auth')->name('naptien.naptien');
+Route::get('apps/pending', [AppController::class, 'pending'])->middleware(['role:admin', 'auth']);
 Route::resource('apps', AppController::class);
 Route::resource('apps.comments', CommentController::class);
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy')->middleware('auth', 'role:admin');
+Route::post('categories', [CategoryController::class, 'create'])->name('categories.create')->middleware('auth', 'role:admin');
 Route::get('most-free-download', [AppController::class, 'mostFreeDownLoad'])->name('apps.most-free-download');
 Route::get('most-paid-download', [AppController::class, 'mostPaidDownload'])->name('apps.most-paid-download');
 Route::get('search', [SearchController::class, 'search'])->name('search');
-Route::get('test', function () {
-    $val = [50000, 100000, 200000, 500000];
-    App\Models\Card::create(['seri' => mt_rand(1, 1000), 'number' => mt_rand(1, 1000), 'amount' => collect($val)->random()]);
-});
+Route::resource('cards', CardController::class)->middleware('auth', 'role:admin');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

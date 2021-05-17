@@ -11,6 +11,7 @@ class WelcomeController extends Controller
     public function index()
     {
         $categories = Category::with(['apps' => function ($q) {
+            $q->where('status', 'approved');
         }])->get();
 
 

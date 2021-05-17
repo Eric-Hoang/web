@@ -46,7 +46,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    {{-- <x-profile-dropdown></x-profile-dropdown> --}}
+                    <x-profile-dropdown></x-profile-dropdown>
                 </div>
             </div>
         </nav>
@@ -54,6 +54,14 @@
             <div class="row" style="margin-top: 1rem">
                 <x-sidebar></x-sidebar>
                 <div class="col-md-9">
+                    @if (session('message'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('message') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @endif
                     <div id="carouselExampleIndicators" class="carousel slide shadow-sm px-3 pb-3 mb-3 bg-white rounded"
                         data-ride="carousel">
                         <ol class="carousel-indicators">

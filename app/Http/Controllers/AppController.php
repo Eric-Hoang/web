@@ -48,6 +48,10 @@ class AppController extends Controller
      */
     public function show(App $app)
     {
+        if ($app->status !== 'approved') {
+            abort(404);
+        }
+
         $app->load(['categories', 'comments' => function ($q) {
             $q->orderByDesc('id');
         }]);
@@ -73,7 +77,7 @@ class AppController extends Controller
 
     public function mostFreeDownLoad()
     {
-        $apps = App::where('is_paid', false)->orderByDesc('download_count')->take(5)->get();
+        $apps = App::where('is_paid', false)->where('status', 'approved')->orderByDesc('download_count')->take(5)->get();
 
         return view('category.show', [
             'apps' => $apps
@@ -81,7 +85,7 @@ class AppController extends Controller
     }
     public function mostPaidDownload()
     {
-        $apps = App::where('is_paid', true)->orderByDesc('download_count')->take(5)->get();
+        $apps = App::where('is_paid', true)->where('status', 'approved')->orderByDesc('download_count')->take(5)->get();
 
         return view('category.show', [
             'apps' => $apps
@@ -106,9 +110,11 @@ class AppController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(App $app, Request $request)
     {
-        //
+        $app->fill($request->only('status'))->save();
+
+        return back();
     }
 
     /**
@@ -120,5 +126,13 @@ class AppController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function pending()
+    {
+        $apps = App::where('status', 'pending')->with('categories')->get();
+        return view('app.pending', [
+            'apps' => $apps
+        ]);
     }
 }
