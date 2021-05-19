@@ -98,7 +98,7 @@
                         </a>
                     </div>
                     @foreach ($categories as $category)
-                    <h3 class="mt-0 d-flex" style="justify-content:space-between;">
+                    <h3 class="mt-3 d-flex" style="justify-content:space-between;">
                         <strong>{{$category->name}}</strong><a href="{{ route('categories.show', $category->id) }}"
                             class="btn btn-light" style="color: blue; border: solid 1px gray;">See
                             More...</a></h3>
