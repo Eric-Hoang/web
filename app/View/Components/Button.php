@@ -9,7 +9,7 @@ class Button extends Component
     public $type;
 
     public function __construct(
-        $type = 'button',
+        $type = 'button'
     ) {
         $this->type = $type;
     }
